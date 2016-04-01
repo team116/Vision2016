@@ -2,10 +2,10 @@
 
 # install dependencies
 apt-get update
-apt-get install git cmake libjpeg8-dev
+apt-get -y install git cmake libjpeg8-dev oracle-java8-jdk
 
 cd /home/pi
-ln -s Vision-2016 vision
+ln -s Vision2016 vision
 
 if cd vision
 then

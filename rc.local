@@ -1,0 +1,31 @@
+#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
+
+# Print the IP address
+_IP=$(hostname -I) || true
+if [ "$_IP" ]; then
+  printf "My IP address is %s\n" "$_IP"
+fi
+
+rm -f /home/pi/GRIP.log*
+sleep 5 # wait until camera shows up
+
+/home/pi/vision/start_stream.sh &
+echo "started stream" >> /home/pi/startup.log
+
+ifconfig eth0 10.1.16.15
+ulimit -c unlimited
+su pi --command "/home/pi/vision/start_grip.sh" &
+echo "started grip" >> /home/pi/startup.log
+
+exit 0

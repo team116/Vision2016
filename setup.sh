@@ -7,6 +7,9 @@ apt-get -y install git cmake libjpeg8-dev oracle-java8-jdk
 cd /home/pi
 ln -s Vision2016 vision
 
+rm /etc/rc.local
+ln -s /home/pi/vision/rc.local /etc/rc.local
+
 if cd vision
 then
 	# set up mjpg-streamer
